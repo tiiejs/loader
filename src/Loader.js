@@ -19,7 +19,7 @@ class Loader extends TiieObject {
         p.frames = frames.attach(target);
 
         p.framesLayer = p.frames.createLayer(p.framesLayerName, {
-            marginTop : 200,
+            // marginTop : 200,
             level : 2,
             modal : 1,
         });
