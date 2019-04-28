@@ -4,6 +4,15 @@ import FramesLayer from "Tiie/Frames/Layer";
 import templateLoader from "./resources/loader.html";
 
 const cn = "Loader";
+
+/**
+ * @class
+ *
+ * @param {Tiie/Frames/Frames} frames
+ * @param {jQuery}             target
+ * @param {boolean}            [params.fixed]
+ * @param {number}             [params.zIndex]
+ */
 class Loader extends TiieObject {
     constructor(frames, target, params = {}) {
         super();
@@ -16,11 +25,13 @@ class Loader extends TiieObject {
         });
 
         // Attach frames to loader.
-        p.frames = frames.attach(target);
+        p.frames = frames.attach(target, {
+            fixed : params.fixed === undefined ? 0 : params.fixed,
+            zIndex : params.zIndex,
+        });
 
         p.framesLayer = p.frames.createLayer(p.framesLayerName, {
-            // marginTop : 200,
-            level : 2,
+            level : 1,
             modal : 1,
         });
     }

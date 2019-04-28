@@ -3,6 +3,12 @@ import TiieObject from "Tiie/Object";
 import Loader from "Tiie/Loader/Loader";
 
 const cn = 'Service';
+
+/**
+ * @class
+ *
+ * @param {Tiie.Frames.Service} frames
+ */
 class Service extends TiieObject {
     constructor(frames) {
         super();
@@ -13,21 +19,30 @@ class Service extends TiieObject {
         });
     }
 
+    /**
+     * Attach loader to given target.
+     *
+     * @param {jQuery}  target
+     * @param {boolean} [params.fixed]
+     * @param {number}  [params.zIndex]
+     *
+     * @return {Tiie/Loader/Loader}
+     */
     attach(target, params = {}) {
-        let p = this.__private(cn),
-            loader
-        ;
+        let p = this.__private(cn);
 
-        if(!p.attached.has(target)) {
-            loader = new Loader(p.frames, target, params);
+        let loader = new Loader(p.frames, target, {
+            fixed : params.fixed,
+            zIndex : params.zIndex,
+        });
 
-            p.attached.set(target, loader);
+        if(p.attached.get(target)) {
+            p.attached.get(target).push(loader);
         } else {
-            loader = p.attached.get(target);
+            p.attached.set(target, [loader]);
         }
 
         return loader;
-
     }
 }
 
