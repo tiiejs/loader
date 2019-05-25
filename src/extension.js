@@ -4,7 +4,7 @@ import style from "./resources/style.scss";
 export default function(app) {
 
     if (!app.components().exists("@frames")) {
-        this.log("Loader extension needs Frames extension.", "warn", "Tiie.Extensions");
+        this.__log("Loader extension needs Frames extension.", "warn", "Tiie.Extensions");
 
         return 0;
     }
